@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BloomQ — Floristería de barrio con entrega exprés en Córdoba</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root{--accent:#ec4899;--accent2:#db2777}
+*{font-family:'Inter',sans-serif}
+body{background:#0a0a0a;color:#f0f0f0}
+.glass{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+.accent{color:var(--accent)}
+.accent-bg{background:var(--accent)}
+.btn-primary{background:var(--accent);color:#000;font-weight:700;transition:all .2s;border-radius:12px;padding:14px 28px;border:none;cursor:pointer}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(236,72,153,.6)}
+.card{background:#111;border:1px solid #1f1f1f;border-radius:20px;transition:all .3s}
+.card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.pulse-dot{display:inline-block;width:8px;height:8px;border-radius:9999px;background:#22c55e;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.opt-btn{background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:10px 16px;transition:all .2s;cursor:pointer;font-weight:600;color:#d4d4d4}
+.opt-btn:hover{border-color:var(--accent);color:#fff}
+.opt-btn.active{background:var(--accent);color:#000;border-color:var(--accent);box-shadow:0 6px 20px -6px rgba(236,72,153,.7)}
+.price-pop{animation:pop .35s ease}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12);color:var(--accent)}100%{transform:scale(1)}}
+.fade-in{animation:fadein .4s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.flower-emoji{position:absolute;transform-origin:center;filter:drop-shadow(0 4px 8px rgba(0,0,0,.4))}
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:#0a0a0a}
+::-webkit-scrollbar-thumb{background:#2a2a2a;border-radius:8px}
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<nav class="fixed top-0 inset-x-0 z-50 glass">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl accent-bg flex items-center justify-center font-black text-black text-lg">BQ</div>
+      <span class="font-extrabold text-xl tracking-tight">Bloom<span class="accent">Q</span></span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-300">
+      <a href="#constructor" class="hover:text-white transition">Crea tu ramo</a>
+      <a href="#catalogo" class="hover:text-white transition">Catálogo</a>
+      <a href="#opiniones" class="hover:text-white transition">Opiniones</a>
+      <a href="#contacto" class="hover:text-white transition">Contacto</a>
+    </div>
+    <a href="#constructor" class="btn-primary text-sm">Pedir ahora 🌸</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="pt-40 pb-24 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 -z-10" style="background:radial-gradient(circle at 20% 20%, rgba(236,72,153,.18), transparent 45%), radial-gradient(circle at 80% 60%, rgba(219,39,119,.15), transparent 50%);"></div>
+  <div class="max-w-5xl mx-auto text-center">
+    <span class="inline-block glass rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide text-neutral-300 mb-6">🌸 Floristería de barrio · Córdoba capital</span>
+    <h1 class="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-6">
+      Ramos a tu medida, <span class="accent">listos en menos de 2 horas</span> y sin hacer una sola llamada
+    </h1>
+    <p class="text-lg text-neutral-400 max-w-2xl mx-auto mb-10">
+      En BloomQ eliges flor, tamaño, envoltorio y ocasión desde el móvil, ves el ramo y el precio al momento, y lo recibes en tu puerta el mismo día. Sin colas, sin esperas, sin sorpresas.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <a href="#constructor" class="btn-primary">Construir mi ramo ahora</a>
+      <a href="#catalogo" class="px-7 py-3.5 rounded-xl border border-neutral-700 font-semibold text-neutral-200 hover:border-neutral-400 transition">Ver catálogo</a>
+    </div>
+    <div class="flex flex-wrap justify-center gap-8 text-sm text-neutral-400">
+      <div class="flex items-center gap-2"><span class="pulse-dot"></span> 14 pedidos entregados hoy en Córdoba</div>
+      <div class="flex items-center gap-2"><span class="accent font-bold">★ 4.9</span> valoración media (312 reseñas)</div>
+      <div class="flex items-center gap-2">🚲 Entrega media: <span class="font-bold text-white">87 min</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURE ESTRELLA: CONSTRUCTOR DE RAMOS -->
+<section id="constructor" class="py-20 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="accent font-bold uppercase tracking-widest text-sm">Constructor de ramos en vivo</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Diseña tu ramo, ve el precio al instante</h2>
+      <p class="text-neutral-400 mt-3 max-w-xl mx-auto">Cada elección actualiza la vista previa y el precio en tiempo real. Lo que ves es lo que recibes.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+
+      <!-- Vista previa + precio -->
+      <div class="card p-8 sticky top-28">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-bold text-lg">Vista previa del ramo</h3>
+          <span class="text-xs glass rounded-full px-3 py-1 text-neutral-400">en directo</span>
+        </div>
+        <div id="preview-wrap" class="relative w-full h-72 rounded-2xl flex items-center justify-center overflow-hidden mb-6 transition-all duration-500" style="background:radial-gradient(circle, #d6a373 0%, #b9854f 70%);">
+          <div id="flower-stage" class="relative w-44 h-44"></div>
+        </div>
+        <div class="flex items-end justify-between mb-2">
+          <div>
+            <p class="text-sm text-neutral-400">Precio total</p>
+            <p id="price" class="text-5xl font-black">19,90 €</p>
+          </div>
+          <div class="text-right text-sm text-neutral-400">
+            <p>Base 9,90 € + extras</p>
+            <p id="price-breakdown" class="text-neutral-500">flor · tamaño · envoltorio</p>
+          </div>
+        </div>
+        <div class="h-px bg-neutral-800 my-5"></div>
+        <p class="text-sm font-semibold mb-3">🚲 Elige franja de entrega para HOY</p>
+        <div id="slots" class="grid grid-cols-3 gap-2 mb-3">
+          <button class="opt-btn slot-btn text-sm py-2.5" data-slot="12:00–14:00">12:00–14:00</button>
+          <button class="opt-btn slot-btn text-sm py-2.5" data-slot="16:00–18:00">16:00–18:00</button>
+          <button class="opt-btn slot-btn text-sm py-2.5" data-slot="18:00–20:00">18:00–20:00</button>
+        </div>
+        <p class="text-sm glass rounded-lg px-3 py-2 text-amber-300 mb-6">⏳ Pide antes de las 17:00 para entrega hoy mismo</p>
+
+        <button id="confirm-btn" class="btn-primary w-full text-base">Confirmar pedido</button>
+        <div id="confirmation" class="hidden mt-5 fade-in glass rounded-xl p-5 border border-pink-500/30">
+          <p class="font-bold accent mb-1">✅ ¡Pedido confirmado!</p>
+          <p id="confirm-summary" class="text-sm text-neutral-300 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- Selectores -->
+      <div class="space-y-8">
+        <div class="card p-6">
+          <p class="font-bold mb-1">1. Flor principal</p>
+          <p class="text-sm text-neutral-500 mb-4">Cada variedad aporta su propio carácter (y precio) al ramo</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button class="opt-btn flower-btn" data-flower="rosas" data-emoji="🌹" data-extra="0">🌹 Rosas <span class="block text-xs opacity-70">+0,00 €</span></button>
+            <button class="opt-btn flower-btn" data-flower="tulipanes" data-emoji="🌷" data-extra="2">🌷 Tulipanes <span class="block text-xs opacity-70">+2,00 €</span></button>
+            <button class="opt-btn flower-btn" data-flower="peonías" data-emoji="🌺" data-extra="6">🌺 Peonías <span class="block text-xs opacity-70">+6,00 €</span></button>
+            <button class="opt-btn flower-btn" data-flower="girasoles" data-emoji="🌻" data-extra="3">🌻 Girasoles <span class="block text-xs opacity-70">+3,00 €</span></button>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <p class="font-bold mb-1">2. Tamaño del ramo</p>
+          <p class="text-sm text-neutral-500 mb-4">Cuantas más flores, más impacto (y más alegría al recibirlo)</p>
+          <div class="grid grid-cols-3 gap-3">
+            <button class="opt-btn size-btn" data-size="pequeño" data-count="3" data-extra="0">Pequeño <span class="block text-xs opacity-70">+0,00 €</span></button>
+            <button class="opt-btn size-btn" data-size="mediano" data-count="6" data-extra="5">Mediano <span class="block text-xs opacity-70">+5,00 €</span></button>
+            <button class="opt-btn size-btn" data-size="grande" data-count="10" data-extra="11">Grande <span class="block text-xs opacity-70">+11,00 €</span></button>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <p class="font-bold mb-1">3. Envoltorio</p>
+          <p class="text-sm text-neutral-500 mb-4">El papel cambia el tono del regalo — y el color de fondo de tu vista previa</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button class="opt-btn wrap-btn" data-wrap="kraft" data-color="#d6a373" data-color2="#b9854f" data-extra="0">Kraft <span class="block text-xs opacity-70">+0,00 €</span></button>
+            <button class="opt-btn wrap-btn" data-wrap="blanco" data-color="#f5f5f5" data-color2="#cfcfcf" data-extra="1.5">Blanco <span class="block text-xs opacity-70">+1,50 €</span></button>
+            <button class="opt-btn wrap-btn" data-wrap="rosa pastel" data-color="#f9c9dc" data-color2="#f49bc4" data-extra="1.5">Rosa pastel <span class="block text-xs opacity-70">+1,50 €</span></button>
+            <button class="opt-btn wrap-btn" data-wrap="negro elegante" data-color="#2b2b2b" data-color2="#0d0d0d" data-extra="3">Negro elegante <span class="block text-xs opacity-70">+3,00 €</span></button>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <p class="font-bold mb-1">4. Ocasión</p>
+          <p class="text-sm text-neutral-500 mb-4">Adaptamos la tarjeta y los detalles finales a tu motivo</p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button class="opt-btn occasion-btn" data-occasion="cumpleaños" data-extra="0">🎂 Cumpleaños</button>
+            <button class="opt-btn occasion-btn" data-occasion="aniversario" data-extra="2">💞 Aniversario</button>
+            <button class="opt-btn occasion-btn" data-occasion="condolencias" data-extra="0">🕊️ Condolencias</button>
+            <button class="opt-btn occasion-btn" data-occasion="porque sí" data-extra="0">✨ Porque sí</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO / SERVICIOS -->
+<section id="catalogo" class="py-20 px-6 bg-[#0d0d0d] border-y border-neutral-900">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="accent font-bold uppercase tracking-widest text-sm">Lo que hacemos</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Más que ramos sueltos</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5" style="background:linear-gradient(135deg, rgba(236,72,153,.25), rgba(219,39,119,.05));">🌸</div>
+        <h3 class="font-bold text-lg mb-2">Ramos a medida</h3>
+        <p class="text-neutral-400 text-sm">Combina flor, tamaño y envoltorio como quieras desde nuestro constructor en vivo.</p>
+      </div>
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5" style="background:linear-gradient(135deg, rgba(236,72,153,.25), rgba(219,39,119,.05));">🚲</div>
+        <h3 class="font-bold text-lg mb-2">Entrega exprés</h3>
+        <p class="text-neutral-400 text-sm">Repartimos en bici eléctrica por todo el centro y el casco histórico en menos de 2 horas.</p>
+      </div>
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5" style="background:linear-gradient(135deg, rgba(236,72,153,.25), rgba(219,39,119,.05));">🎁</div>
+        <h3 class="font-bold text-lg mb-2">Suscripción semanal</h3>
+        <p class="text-neutral-400 text-sm">Un ramo fresco cada semana en tu negocio o en casa, con flores de temporada y kilómetro cero.</p>
+      </div>
+      <div class="card p-7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-5" style="background:linear-gradient(135deg, rgba(236,72,153,.25), rgba(219,39,119,.05));">💌</div>
+        <h3 class="font-bold text-lg mb-2">Tarjetas personalizadas</h3>
+        <p class="text-neutral-400 text-sm">Escribe tu mensaje y nosotros lo escribimos a mano en una tarjeta a juego con el envoltorio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRUEBA SOCIAL -->
+<section id="opiniones" class="py-20 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="accent font-bold uppercase tracking-widest text-sm">Nos avalan en el barrio</span>
+      <h2 class="text-3xl md:text-5xl font-black mt-2">Lo que dicen nuestros clientes</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <div class="card p-7">
+        <p class="text-amber-400 mb-3">★★★★★</p>
+        <p class="text-neutral-300 mb-4">"Pedí un ramo de cumpleaños a las 15:30 sin pensarlo y a las 17:00 ya estaba en la puerta de mi madre. Una pasada de servicio."</p>
+        <p class="font-semibold text-sm">— Marta R., Ciudad Jardín</p>
+      </div>
+      <div class="card p-7">
+        <p class="text-amber-400 mb-3">★★★★★</p>
+        <p class="text-neutral-300 mb-4">"El constructor de ramos es una pasada, ves exactamente lo que vas a recibir y el precio según vas eligiendo. Cero sorpresas."</p>
+        <p class="font-semibold text-sm">— Javier M., Centro</p>
+      </div>
+      <div class="card p-7">
+        <p class="text-amber-400 mb-3">★★★★★</p>
+        <p class="text-neutral-300 mb-4">"Tengo la suscripción semanal para la recepción de mi clínica y siempre llegan frescas y puntuales. Recomendadísimo."</p>
+        <p class="font-semibold text-sm">— Clínica Dental Sur</p>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-6 text-center">
+      <div class="card py-8"><p class="text-4xl font-black accent">4.9★</p><p class="text-neutral-400 text-sm mt-1">valoración media</p></div>
+      <div class="card py-8"><p class="text-4xl font-black accent">2.300+</p><p class="text-neutral-400 text-sm mt-1">ramos entregados este año</p></div>
+      <div class="card py-8"><p class="text-4xl font-black accent">87 min</p><p class="text-neutral-400 text-sm mt-1">tiempo medio de entrega</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="py-20 px-6">
+  <div class="max-w-4xl mx-auto card p-12 text-center" style="background:linear-gradient(135deg, rgba(236,72,153,.12), rgba(17,17,17,1));">
+    <h2 class="text-3xl md:text-4xl font-black mb-4">¿Le hacemos llegar flores a alguien hoy?</h2>
+    <p class="text-neutral-400 mb-8 max-w-xl mx-auto">Construye tu ramo en menos de un minuto y elige la franja de entrega que mejor te venga. Sin llamadas, sin colas, sin esperas.</p>
+    <a href="#constructor" class="btn-primary inline-block">Empezar a construir mi ramo</a>
+    <p class="text-neutral-500 text-sm mt-6">📍 Calle Alfaros, 14, Córdoba · ☎ 957 12 34 56 · ✉ hola@bloomq.es</p>
+  </div>
+</section>
+
+<footer class="py-10 px-6 border-t border-neutral-900 text-center text-neutral-500 text-sm">
+  <p>© 2026 BloomQ — Floristería de barrio en Córdoba. Hecho con 🌸 y entregado con prisa (buena).</p>
+  <p class="mt-2 text-neutral-700">Demo de sitio web a medida creada por PuntoZero — puntozero.studio</p>
+</footer>
+
+<script>
+(function(){
+  const state = {
+    flower: { name: 'rosas', emoji: '🌹', extra: 0 },
+    size: { name: 'mediano', count: 6, extra: 5 },
+    wrap: { name: 'kraft', color: '#d6a373', color2: '#b9854f', extra: 0 },
+    occasion: { name: 'porque sí', extra: 0 },
+    slot: null
+  };
+  const BASE = 9.90;
+
+  const priceEl = document.getElementById('price');
+  const breakdownEl = document.getElementById('price-breakdown');
+  const previewWrap = document.getElementById('preview-wrap');
+  const stage = document.getElementById('flower-stage');
+  const confirmBtn = document.getElementById('confirm-btn');
+  const confirmation = document.getElementById('confirmation');
+  const confirmSummary = document.getElementById('confirm-summary');
+
+  function fmt(n){ return n.toFixed(2).replace('.', ',') + ' €'; }
+
+  function setActive(groupSelector, el){
+    document.querySelectorAll(groupSelector).forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function renderFlowers(){
+    stage.innerHTML = '';
+    const n = state.size.count;
+    const positions = {
+      3: [[50,30,1],[28,62,0.85],[72,62,0.85]],
+      6: [[50,18,1],[26,38,0.9],[74,38,0.9],[14,68,0.85],[50,72,1],[86,68,0.85]],
+      10: [[50,12,1],[26,28,0.9],[74,28,0.9],[10,52,0.8],[38,48,0.95],[62,48,0.95],[90,52,0.8],[22,76,0.85],[50,84,1],[78,76,0.85]]
+    };
+    const layout = positions[n] || positions[6];
+    layout.forEach(([x,y,scale], i) => {
+      const span = document.createElement('span');
+      span.className = 'flower-emoji';
+      span.style.left = x + '%';
+      span.style.top = y + '%';
+      span.style.fontSize = (2.1 * scale) + 'rem';
+      span.style.transform = `translate(-50%,-50%) rotate(${(i % 2 === 0 ? -1 : 1) * (i * 7 % 20)}deg)`;
+      span.textContent = state.flower.emoji;
+      stage.appendChild(span);
+    });
+    // stem/wrap base
+    const wrapEl = document.createElement('div');
+    wrapEl.className = 'absolute bottom-0 left-1/2';
+    wrapEl.style.transform = 'translateX(-50%)';
+    wrapEl.style.width = '70px';
+    wrapEl.style.height = '60px';
+    wrapEl.style.borderRadius = '50% 50% 0 0 / 60% 60% 0 0';
+    wrapEl.style.background = `linear-gradient(180deg, ${state.wrap.color}, ${state.wrap.color2})`;
+    wrapEl.style.border = '1px solid rgba(0,0,0,.25)';
+    stage.appendChild(wrapEl);
+  }
+
+  function renderPreviewBg(){
+    previewWrap.style.background = `radial-gradient(circle, ${state.wrap.color} 0%, ${state.wrap.color2} 70%)`;
+  }
+
+  function calcPrice(){
+    return BASE + state.flower.extra + state.size.extra + state.wrap.extra + state.occasion.extra;
+  }
+
+  function updatePrice(){
+    const total = calcPrice();
+    priceEl.textContent = fmt(total);
+    priceEl.classList.remove('price-pop');
+    void priceEl.offsetWidth;
+    priceEl.classList.add('price-pop');
+    breakdownEl.textContent = `${state.flower.name} · ${state.size.name} · ${state.wrap.name}`;
+  }
+
+  function updateAll(){
+    renderFlowers();
+    renderPreviewBg();
+    updatePrice();
+  }
+
+  // Flower buttons
+  document.querySelectorAll('.flower-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.flower = { name: btn.dataset.flower, emoji: btn.dataset.emoji, extra: parseFloat(btn.dataset.extra) };
+      setActive('.flower-btn', btn);
+      updateAll();
+    });
+  });
+
+  // Size buttons
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.size = { name: btn.dataset.size, count: parseInt(btn.dataset.count), extra: parseFloat(btn.dataset.extra) };
+      setActive('.size-btn', btn);
+      updateAll();
+    });
+  });
+
+  // Wrap buttons
+  document.querySelectorAll('.wrap-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.wrap = { name: btn.dataset.wrap, color: btn.dataset.color, color2: btn.dataset.color2, extra: parseFloat(btn.dataset.extra) };
+      setActive('.wrap-btn', btn);
+      updateAll();
+    });
+  });
+
+  // Occasion buttons
+  document.querySelectorAll('.occasion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.occasion = { name: btn.dataset.occasion, extra: parseFloat(btn.dataset.extra) };
+      setActive('.occasion-btn', btn);
+      updatePrice();
+    });
+  });
+
+  // Slot buttons
+  document.querySelectorAll('.slot-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.slot = btn.dataset.slot;
+      setActive('.slot-btn', btn);
+    });
+  });
+
+  // Confirm order
+  confirmBtn.addEventListener('click', () => {
+    if (confirmBtn.disabled) return;
+    const total = calcPrice();
+    const slotText = state.slot ? state.slot : 'la próxima franja disponible';
+    confirmBtn.textContent = '✓ Pedido enviado';
+    confirmBtn.style.background = '#22c55e';
+    confirmBtn.style.color = '#04240f';
+    confirmBtn.disabled = true;
+    confirmBtn.style.cursor = 'default';
+    confirmBtn.style.transform = 'none';
+
+    confirmSummary.innerHTML =
+      `Ramo de <strong>${state.flower.name}</strong> (tamaño <strong>${state.size.name}</strong>), envuelto en <strong>${state.wrap.name}</strong>, ` +
+      `pensado para <strong>${state.occasion.name}</strong>.<br>` +
+      `Entrega hoy en la franja <strong>${slotText}</strong>.<br>` +
+      `Total cobrado: <strong class="accent">${fmt(total)}</strong>. Te avisaremos por WhatsApp cuando el repartidor esté en camino. 🌸`;
+    confirmation.classList.remove('hidden');
+
+    setTimeout(() => {
+      confirmBtn.textContent = 'Confirmar pedido';
+      confirmBtn.style.background = '';
+      confirmBtn.style.color = '';
+      confirmBtn.disabled = false;
+      confirmBtn.style.cursor = 'pointer';
+    }, 6000);
+  });
+
+  // Init defaults visually
+  document.querySelector('.flower-btn[data-flower="rosas"]').classList.add('active');
+  document.querySelector('.size-btn[data-size="mediano"]').classList.add('active');
+  document.querySelector('.wrap-btn[data-wrap="kraft"]').classList.add('active');
+  document.querySelector('.occasion-btn[data-occasion="porque sí"]').classList.add('active');
+
+  updateAll();
+
+  // Live "orders today" ticker for stats credibility
+  let ordersToday = 14;
+  setInterval(() => {
+    ordersToday += 1;
+    const el = document.querySelector('header .pulse-dot').parentElement;
+    el.innerHTML = `<span class="pulse-dot"></span> ${ordersToday} pedidos entregados hoy en Córdoba`;
+  }, 45000);
+})();
+</script>
+
+</body>
+</html>
